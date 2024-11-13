@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Update Profile</title>
+	<link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+</head>
+
+<style>
+	/* Reset some default styles */
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: Arial, sans-serif;
+	}
+
+	body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 100vh;
+		background-color: #f0f2f5;
+	}
+
+	.form-container {
+		width: 100%;
+		max-width: 400px;
+		padding: 20px;
+		background-color: #ffffff;
+		border-radius: 8px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	h1 {
+		text-align: center;
+		color: #333;
+		margin-bottom: 20px;
+	}
+
+	label {
+		display: block;
+		margin-top: 15px;
+		font-size: 14px;
+		color: #333;
+	}
+
+	.input-field {
+		width: 100%;
+		padding: 10px;
+		margin-top: 5px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		font-size: 14px;
+	}
+
+	.error {
+		color: #e74c3c;
+		font-size: 12px;
+		margin-top: 5px;
+		display: block;
+	}
+
+	.submit-button {
+		width: 100%;
+		padding: 10px;
+		margin-top: 20px;
+		border: none;
+		border-radius: 4px;
+		background-color: #4CAF50;
+		color: #fff;
+		font-size: 16px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+	}
+
+	.submit-button:hover {
+		background-color: #45a049;
+	}
+</style>
+
+<body>
+	<div th:include="message.html"></div> <!-- Include any session messages -->
+
+	<div class="form-container">
+		<h1>User Update Profile</h1>
+		<form action="/user/update" method="post" th:object="${user}">
+			<input type="hidden" name="user_id" th:value="*{user_id}">
+
+			<label for="name">Name:</label>
+			<input type="text" id="name" name="name" th:value="*{name}" class="input-field" required>
+			<span class="error" th:errors="*{name}"></span>
+
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" th:value="*{email}" class="input-field" required>
+			<span class="error" th:errors="*{email}"></span>
+
+			<label for="mobile">Phone Number:</label>
+			<input type="tel" id="mobile" name="mobile" th:value="*{mobile}" class="input-field" required
+				pattern="^\+?[0-9]{10,15}$" placeholder="Enter phone number">
+			<span class="error" th:errors="*{mobile}"></span>
+
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" th:value="*{password}" class="input-field" required>
+			<span class="error" th:errors="*{password}"></span>
+
+			<!-- Optional: Uncomment if you want to allow password confirmation -->
+			<!-- <label for="confirmpassword">Confirm Password:</label>
+			<input type="password" id="confirmpassword" name="confirmpassword" th:value="*{confirmpassword}" class="input-field">
+			<span class="error" th:errors="*{confirmpassword}"></span> -->
+
+			<button type="submit" class="submit-button">Update</button>
+		</form>
+	</div>
+</body>
+
+</html>

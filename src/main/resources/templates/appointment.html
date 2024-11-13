@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Doctor Schedule</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f4f4f9;
+			margin: 0;
+			padding: 20px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+
+		table {
+			width: 80%;
+			border-collapse: collapse;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+			background-color: #fff;
+		}
+
+		th,
+		td {
+			padding: 12px 15px;
+			text-align: left;
+		}
+
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		button {
+			padding: 8px 12px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+			border-radius: 4px;
+			font-size: 0.9rem;
+			transition: background-color 0.3s ease;
+		}
+
+		button:hover {
+			background-color: #45a049;
+		}
+
+		a {
+			text-decoration: none;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Include the message fragment if needed -->
+	<th:block th:include="message.html"></th:block>
+
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Specialization</th>
+			<th>Experience</th>
+			<th>Available Schedule</th>
+			<th>Appointment</th>
+		</tr>
+		<tr th:each="doctor : ${doctor}">
+			<td th:text="${doctor.name}">Doctor Name</td>
+			<td th:text="${doctor.specialization}">Specialization</td>
+			<td th:text="${doctor.experience}">Experience</td>
+			<td th:text="${doctor.aval_sche}">Available Schedule</td>
+			<td>
+				<a th:href="'/user/appointmentBooking/' + ${doctor.doctor_id}">
+					<button>Book Appointment</button>
+				</a>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>

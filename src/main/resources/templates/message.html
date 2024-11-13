@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<!-- Success and Failure messages -->
+	<h3 th:if="${session.success}" th:text="${session.success}"></h3>
+	<h3 th:if="${session.failure}" th:text="${session.failure}"></h3>
+
+	<!-- Remove session messages after rendering -->
+	<th:block th:text="${@sessionMessageRemover.removeMessage()}"></th:block>
+</body>
+
+</html>

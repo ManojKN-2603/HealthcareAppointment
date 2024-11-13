@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Appointments</title>
+	<link rel="stylesheet" href="styles.css"> <!-- Optional for adding custom styles -->
+	<style>
+		/* Table Styling */
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin: 20px 0;
+		}
+
+		th,
+		td {
+			padding: 10px;
+			border: 1px solid #ddd;
+			text-align: left;
+		}
+
+		th {
+			background-color: #f4f4f4;
+		}
+
+		button {
+			padding: 8px 15px;
+			background-color: #f44336;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #d32f2f;
+		}
+
+		/* Responsive styling */
+		@media (max-width: 768px) {
+			table {
+				width: 100%;
+				font-size: 12px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div th:include="message.html"></div> <!-- Include any session messages -->
+
+	<table>
+		<tr>
+			<th>User Name</th>
+			<th>Doctor Name</th>
+			<th>Appointment Date</th>
+			<th>Cancel Appointment</th>
+		</tr>
+		<tr th:each="appointment : ${appointments}">
+			<td th:text="${appointment.user.getName()}"></td>
+			<td th:text="${appointment.doctor.getName()}"></td>
+			<td th:text="${appointment.date}"></td>
+			<td>
+				<a th:href="'/user/cancelBooking/' + ${appointment.id}">
+					<button>Cancel</button>
+				</a>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>
